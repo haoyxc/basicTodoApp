@@ -1,9 +1,9 @@
 import React from "react";
 
 class Todo extends React.Component {
-  toggleComplete(e) {
-    console.log("hello");
-  }
+  //   toggleComplete(e) {
+  //     // console.log("hello");
+  //   }
   render() {
     return (
       <li>
