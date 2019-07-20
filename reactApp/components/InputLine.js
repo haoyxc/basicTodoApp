@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+const dbUrl = "http://localhost:3000/db";
 
 export class InputLine extends Component {
   constructor(props) {
@@ -23,13 +24,13 @@ export class InputLine extends Component {
 
   render() {
     return (
-      <form action="" style={{ display: "flex" }}>
+      <form action={dbUrl} style={{ display: "flex" }} method="POST">
         <input
           style={{ flex: "10", padding: "10px" }}
           type="text"
-          name="title"
+          name="taskText"
           id=""
-          placeholder="Add Todo..."
+          placeholder="Do something..."
           value={this.state.typedText}
           onChange={e => this.handleTyping(e)}
         />

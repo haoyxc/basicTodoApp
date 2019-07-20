@@ -7,21 +7,32 @@ class Todo extends React.Component {
   render() {
     return (
       <li className="todoItem">
-        <input
-          type="checkbox"
-          name="toggleComplete"
-          id=""
-          onClick={event => this.props.toggleCompl(this.props.a)}
-        />
         {!this.props.task.completed ? (
-          this.props.task.taskText
+          <div>
+            <input
+              type="checkbox"
+              name="toggleComplete"
+              id=""
+              onClick={event => this.props.toggleCompl(this.props.task._id)}
+            />{" "}
+            {this.props.task.task}
+          </div>
         ) : (
-          <strike>{this.props.task.taskText}</strike>
+          <div>
+            <input
+              type="checkbox"
+              name="toggleComplete"
+              id=""
+              onClick={event => this.props.toggleCompl(this.props.task._id)}
+              checked
+            />{" "}
+            <strike>{this.props.task.task}</strike>
+          </div>
         )}
         <button
-          style={btnStyle}
+          className="removeBtn"
           // onClick={(this.props.task.key) => {this.props.xClick(this.props.task.key)}}
-          onClick={e => this.props.xClick(this.props.a)}
+          onClick={e => this.props.xClick(this.props.task._id)}
         >
           x
         </button>
@@ -30,13 +41,4 @@ class Todo extends React.Component {
   }
 }
 
-const btnStyle = {
-  float: "right",
-  cursor: "pointer",
-  borderRadius: "50%",
-  padding: "5px 9px",
-  border: "none",
-  background: "#ff0000",
-  color: "#fff"
-};
 export default Todo;

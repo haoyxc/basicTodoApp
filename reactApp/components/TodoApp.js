@@ -2,12 +2,10 @@ import React from "react";
 import TodoList from "./TodoList";
 import InputLine from "./InputLine";
 import uuid from "uuid";
+import axios from "axios";
 
-let dummyData = [
-  { id: 1, taskText: "cry", completed: false },
-  { id: 2, taskText: "eat", completed: false },
-  { id: 3, taskText: "sleep", completed: false }
-];
+debugger;
+const dbUrl = "http://localhost:3000/db";
 
 export default class TodoApp extends React.Component {
   constructor(props) {
@@ -16,47 +14,70 @@ export default class TodoApp extends React.Component {
       todos: []
     };
   }
-  toggleCompl(key) {
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === key) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      })
-    });
-  }
-  addTodo(task) {
-    let newId = uuid.v4();
-    let newTodo = {
-      id: newId,
-      taskText: task,
-      completed: false
-    };
-    console.log(newTodo);
-    dummyData.push(newTodo);
-    this.setState({
-      todos: dummyData
-    });
-  }
-  removeTodo(key) {
-    console.log(this.state, key);
-    dummyData = [...this.state.todos.filter(todo => todo.id !== key)];
-    this.setState({
-      todos: dummyData
-    });
-
-    console.log([...this.state.todos.filter(todo => todo.id !== key)]);
-  }
 
   componentDidMount() {
-    this.setState({
-      todos: dummyData
-    });
+    axios
+      .get(dbUrl + "/all")
+      .then(response => {
+        this.setState({
+          todos: response.data
+        });
+        console.log(response);
+      })
+      .catch(function(e) {
+        console.log(e);
+      });
   }
+  toggleCompl(key) {
+    axios
+      .post(dbUrl + "/toggle", {
+        id: key
+      })
+      .then(response => {
+        let copyTodos = [...this.state.todos];
+        let index = copyTodos.findIndex(el => el._id === key);
+        copyTodos.splice(index, 1, response.data);
+        this.setState({
+          todos: copyTodos
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  addTodo(task) {
+    axios
+      .post(dbUrl, {
+        task: task
+      })
+      .then(response => {
+        console.log(response.data);
+        this.setState({ todos: this.state.todos.concat(response.data) });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+  removeTodo(key) {
+    axios
+      .post(dbUrl + "/remove", {
+        id: key
+      })
+      .then(response => {
+        this.setState({
+          todos: response.data
+        });
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="container">
+        <h3 className="pageTitle">To-Do List</h3>
         <InputLine submit={task => this.addTodo(task)} />
         <TodoList
           todos={this.state.todos}

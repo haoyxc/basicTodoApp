@@ -1,9 +1,30 @@
+:root {
+  --primary-color: #ffc0cb;
+  --monochrom1: #ff8da1;
+  --monochrom2: #ff8da1;
+  --comp-color: #c0fff4;
+}
 /* * {
   padding: 0;
   margin: 0;
 } */
+body {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 1.2rem;
+}
+.container {
+  margin: 50px;
+  background-color: var(--primary-color);
+  padding: 20px;
+  border-radius: 20px;
+}
 .todolist {
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+.pageTitle {
+  text-align: center;
 }
 .btn {
   display: inline-block;
@@ -14,5 +35,16 @@
   cursor: pointer;
 }
 .todoItem {
-  height: 30px;
+  /* height: 30px; */
+  margin: 8px 0;
+  border-bottom: dashed 1px var(--monochrom2);
+}
+.removeBtn {
+  float: right;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px 9px;
+  border: none;
+  background: var(--comp-color);
+  color: #333;
 }
