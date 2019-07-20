@@ -29,13 +29,15 @@ class Todo extends React.Component {
             <strike>{this.props.task.task}</strike>
           </div>
         )}
-        <button
-          className="removeBtn"
-          // onClick={(this.props.task.key) => {this.props.xClick(this.props.task.key)}}
-          onClick={e => this.props.xClick(this.props.task._id)}
-        >
-          x
-        </button>
+        <div>
+          <button
+            className="removeBtn"
+            // onClick={(this.props.task.key) => {this.props.xClick(this.props.task.key)}}
+            onClick={e => this.props.xClick(this.props.task._id)}
+          >
+            x
+          </button>
+        </div>
       </li>
     );
   }

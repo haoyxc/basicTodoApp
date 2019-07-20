@@ -38,9 +38,11 @@ body {
   /* height: 30px; */
   margin: 8px 0;
   border-bottom: dashed 1px var(--monochrom2);
+  display: flex;
+  justify-content: space-between;
 }
 .removeBtn {
-  float: right;
+  /* float: right; */
   cursor: pointer;
   border-radius: 50%;
   padding: 5px 9px;

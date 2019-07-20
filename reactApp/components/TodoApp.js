@@ -22,7 +22,6 @@ export default class TodoApp extends React.Component {
         this.setState({
           todos: response.data
         });
-        console.log(response);
       })
       .catch(function(e) {
         console.log(e);
@@ -51,7 +50,6 @@ export default class TodoApp extends React.Component {
         task: task
       })
       .then(response => {
-        console.log(response.data);
         this.setState({ todos: this.state.todos.concat(response.data) });
       })
       .catch(function(error) {
@@ -67,7 +65,6 @@ export default class TodoApp extends React.Component {
         this.setState({
           todos: response.data
         });
-        console.log(response);
       })
       .catch(err => {
         console.log(err);
